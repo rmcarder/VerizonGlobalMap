@@ -1,3 +1,4 @@
+
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -264,7 +265,7 @@
 ,
 {"type":"Feature","id":"TWN","properties":{"name":"Taiwan"},"geometry":{"type":"Polygon","coordinates":[[[121.777818,24.394274],[121.175632,22.790857],[120.74708,21.970571],[120.220083,22.814861],[120.106189,23.556263],[120.69468,24.538451],[121.495044,25.295459],[121.951244,24.997596],[121.777818,24.394274]]]}}
 ,
-{"type":"Feature","id":"TZA","properties":{"name":"United Republic of Tanzania"},"geometry":{"type":"Polygon","coordinates":[[[33.903711,-0.95],[34.07262,-1.05982],[37.69869,-3.09699],[37.7669,-3.67712],[39.20222,-4.67677],[38.74054,-5.90895],[38.79977,-6.47566],[39.44,-6.84],[39.47,-7.1],[39.19469,-7.7039],[39.25203,-8.00781],[39.18652,-8.48551],[39.53574,-9.11237],[39.9496,-10.0984],[40.31659,-10.3171],[39.521,-10.89688],[38.427557,-11.285202],[37.82764,-11.26879],[37.47129,-11.56876],[36.775151,-11.594537],[36.514082,-11.720938],[35.312398,-11.439146],[34.559989,-11.52002],[34.28,-10.16],[33.940838,-9.693674],[33.73972,-9.41715],[32.759375,-9.230599],[32.191865,-8.930359],[31.556348,-8.762049],[31.157751,-8.594579],[30.74,-8.34],[30.2,-7.08],[29.62,-6.52],[29.419993,-5.939999],[29.519987,-5.419979],[29.339998,-4.499983],[29.753512,-4.452389],[30.11632,-4.09012],[30.50554,-3.56858],[30.75224,-3.35931],[30.74301,-3.03431],[30.52766,-2.80762],[30.46967,-2.41383],[30.758309,-2.28725],[30.816135,-1.698914],[30.419105,-1.134659],[30.76986,-1.01455],[31.86617,-1.02736],[33.903711,-0.95]]]}}
+{"type":"Feature","id":"TZA","properties":{"name":"Tanzania"},"geometry":{"type":"Polygon","coordinates":[[[33.903711,-0.95],[34.07262,-1.05982],[37.69869,-3.09699],[37.7669,-3.67712],[39.20222,-4.67677],[38.74054,-5.90895],[38.79977,-6.47566],[39.44,-6.84],[39.47,-7.1],[39.19469,-7.7039],[39.25203,-8.00781],[39.18652,-8.48551],[39.53574,-9.11237],[39.9496,-10.0984],[40.31659,-10.3171],[39.521,-10.89688],[38.427557,-11.285202],[37.82764,-11.26879],[37.47129,-11.56876],[36.775151,-11.594537],[36.514082,-11.720938],[35.312398,-11.439146],[34.559989,-11.52002],[34.28,-10.16],[33.940838,-9.693674],[33.73972,-9.41715],[32.759375,-9.230599],[32.191865,-8.930359],[31.556348,-8.762049],[31.157751,-8.594579],[30.74,-8.34],[30.2,-7.08],[29.62,-6.52],[29.419993,-5.939999],[29.519987,-5.419979],[29.339998,-4.499983],[29.753512,-4.452389],[30.11632,-4.09012],[30.50554,-3.56858],[30.75224,-3.35931],[30.74301,-3.03431],[30.52766,-2.80762],[30.46967,-2.41383],[30.758309,-2.28725],[30.816135,-1.698914],[30.419105,-1.134659],[30.76986,-1.01455],[31.86617,-1.02736],[33.903711,-0.95]]]}}
 ,
 {"type":"Feature","id":"UGA","properties":{"name":"Uganda"},"geometry":{"type":"Polygon","coordinates":[[[31.86617,-1.02736],[30.76986,-1.01455],[30.419105,-1.134659],[29.821519,-1.443322],[29.579466,-1.341313],[29.587838,-0.587406],[29.8195,-0.2053],[29.875779,0.59738],[30.086154,1.062313],[30.468508,1.583805],[30.85267,1.849396],[31.174149,2.204465],[30.77332,2.33989],[30.83385,3.50917],[31.24556,3.7819],[31.88145,3.55827],[32.68642,3.79232],[33.39,3.79],[34.005,4.249885],[34.47913,3.5556],[34.59607,3.05374],[35.03599,1.90584],[34.6721,1.17694],[34.18,0.515],[33.893569,0.109814],[33.903711,-0.95],[31.86617,-1.02736]]]}}
 ,
@@ -299,7 +300,7 @@ console.log(geojsonFeature.features.length)
 
 	
 
-		var mymap = L.map('mapid').setView([51.505, -0.09], 13);
+		var mymap = L.map('mapid').setView([10, -0.09], 3);
 		L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
     	attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
     	maxZoom: 18,
@@ -413,31 +414,31 @@ info.onAdd = function (mymap) {
 };
 info.update = function (props) {
 	var text;
-    this._div.innerHTML = '<h4>Verizon Data Plan</h4>' +  (props ?
-        '<b>' + props.name + '</b>' + "<br>" + " pay as go price: " + props.asGo + '<br>' + getText(props)
-        : 'Hover over a state');
+    this._div.innerHTML = '<h4>Verizon Data Plans and Rates</h4>' +  (props ?
+        '<b>' + props.name + '</b>' + "<br>" + getText(props) + "<br>" + "Data: " + props.asGo + ' per MB'+'<br>'
+        : 'Hover over a country');
 };
 
 function getText(props){
 	if(props.offered === "yes"  && (props.name !== "Canada" || props.name !== "Mexico")){
-		text = '$25 for 100MB of data' +  '<br/ >' +
+		text = 'Available Plans:' + '<br>' + '$25 for 100MB of data' +  '<br/ >' +
 					'$40 for 100 minutes, 100 texts, and 100MB of data '+'<br/ >' +
 					'$45 for 250MB of data '+'<br/ >' +
 					'$85 for 250 minutes, 250 texts, and 250MB of data '+' <br/ >';
 	}else{
-		text = "No global plans are available. Please turn off data roaming and only use the phone for emergencies."
+		text = "No global plans are available. Please turn off data roaming and only use the phone for emergencies." + "<br>"
 	}
 	if(props.name !== "Canada" && props.name !== "Mexico"){
-		text+= '</br>' + ' voice: $1.79/min'
+		text+= '</br>' + 'Pay as You Go Rates:' + '<br>' +' Voice: $1.79/min'
 	}else if (props.name === "Canada"  || props.name === "Mexico"){
 		text = '$15 for 100MB of data' +  '<br/ >' +
 				'$25 for 1GB Data, 500 minutes, 500 texts' + '<br/ >';
-		text+= '</br>' + 'voice: $0.99/min';
+		text+= '</br>' + 'Voice: $0.99/min';
 	}
-	text+= '</br>' + ' sent SMS : $0.50, MMS = $0.25'
-	+ '</br>' + ' received SMS: $0.05, MMS = $0.25';
+	text+= '</br>' + ' Sent SMS : $0.50, MMS = $0.25'
+	+ '</br>' + ' Received SMS: $0.05, MMS = $0.25';
 	if(props.name === "United States of America"){
-		text = "domestic rates apply";
+		text = "Domestic rates apply";
 	}
 	return text
 }
