@@ -21,6 +21,17 @@
 		    margin: 0 0 5px;
 		    color: #777;
 		}
+		.legend {
+    line-height: 18px;
+    color: #555;
+}
+.legend i {
+    width: 18px;
+    height: 18px;
+    float: left;
+    margin-right: 8px;
+    opacity: 0.7;
+}
 		info.addTo(mymap);
    </style>
 
@@ -455,8 +466,10 @@ function getText(props){
 		text = "No global plans are available. Please turn off data roaming and only use the phone for emergencies." + "<br>"
 	}
 	if(props.name !== "Canada" && props.name !== "Mexico"){
+		if(String(props.voiceRate) === "undefined"){
+			props.voiceRate = "unavailable"
+		}
 		text+= '</br>' + 'Pay as You Go Rates:' + '<br>' +' Voice: ' + props.voiceRate;
-		console.log(props.voiceRate);
 	}else if (props.name === "Canada"  || props.name === "Mexico"){
 		text = '$15 for 100MB of data' +  '<br/ >' +
 				'$25 for 1GB Data, 500 minutes, 500 texts' + '<br/ >';
@@ -469,6 +482,28 @@ function getText(props){
 	}
 	return text
 }
+
+var legend = L.control({position: 'bottomright'});
+
+legend.onAdd = function (mymap) {
+
+    var div = L.DomUtil.create('div', 'info legend');
+
+            div.innerHTML ='<i style="background:' + '#4daf4a' + '"></i> ' +
+            				"data plans available" + '<br>' + 
+            				'<i style="background:' + '#ff7f00' + '"></i> ' +
+            				"data plans unavailable, but pay as you go plans are" + '<br>' + 
+            				'<i style="background:' + '#ff6961' + '"></i> ' +
+            				"data plans unavailable" + '<br>' + 
+            				'<i style="background:' + '#AEC6CF' + '"></i> ' +
+            				"domestic rates apply" + '<br>' + 
+            				'<i style="background:' + '#03C03C' + '"></i> ' +
+            				"seperate plan, please see map" + '<br>';
+
+    return div;
+};
+
+legend.addTo(mymap);
 
 info.addTo(mymap);
 		geojson = L.geoJson(geojsonFeature, {
