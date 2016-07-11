@@ -7,7 +7,7 @@
 	 <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
 	<style>
     body { margin:0; padding:0; }
-    #mapid { position:absolute; width:1000px; height: 650px;}
+    #mapid { position:absolute; width:100%; height: 100%;}
 
 		.info {
 		    padding: 6px 8px;
@@ -392,14 +392,14 @@ console.log(geojsonFeature.features.length)
            		return '#AEC6CF'
            	}
            	 if(name == "Canada" || name == "Mexico"){
-           		return '#03C03C'
+           		return '#7570b3'
            	}
             if(d == "yes"){
-				return '#4daf4a'
+				return '#1b9e77'
 			} if (d == "no"){
-				return '#ff7f00'
+				return '#d95f02'
 			}  if (d == "N/A"){
-				return '#ff6961'
+				return '#d7191c'
 			}
 		}
 
@@ -467,7 +467,7 @@ function getText(props){
 	}
 	if(props.name !== "Canada" && props.name !== "Mexico"){
 		if(String(props.voiceRate) === "undefined"){
-			props.voiceRate = "unavailable"
+			props.voiceRate = "Unavailable"
 		}
 		text+= '</br>' + 'Pay as You Go Rates:' + '<br>' +' Voice: ' + props.voiceRate;
 	}else if (props.name === "Canada"  || props.name === "Mexico"){
@@ -489,16 +489,36 @@ legend.onAdd = function (mymap) {
 
     var div = L.DomUtil.create('div', 'info legend');
 
-            div.innerHTML ='<i style="background:' + '#4daf4a' + '"></i> ' +
-            				"data plans available" + '<br>' + 
-            				'<i style="background:' + '#ff7f00' + '"></i> ' +
-            				"data plans unavailable, but pay as you go plans are" + '<br>' + 
-            				'<i style="background:' + '#ff6961' + '"></i> ' +
-            				"data plans unavailable" + '<br>' + 
+            div.innerHTML ='<i style="background:' + '#1b9e77' + '"></i> ' +
+            				"Data/Voice Plans Available" + '<br>' + 
+            				'<i style="background:' + '#d7191c' + '"></i> ' +
+            				"No Plans Available; Pay as you Go Available (Beware of High Rates)" + '<br>' + 
+            				'<i style="background:' + '#d95f02' + '"></i> ' +
+            				"No Plans or Service Available" + '<br>' + 
             				'<i style="background:' + '#AEC6CF' + '"></i> ' +
-            				"domestic rates apply" + '<br>' + 
-            				'<i style="background:' + '#03C03C' + '"></i> ' +
-            				"seperate plan, please see map" + '<br>';
+            				"Domestic Rates Apply" + '<br>' + 
+            				'<i style="background:' + '#7570b3' + '"></i> ' +
+            				"Canada/Mexico Plan Available" + '<br>';
+
+
+	
+		function getColor(d, name) {
+           	if(name == "United States of America"){
+           		return '#AEC6CF'
+           	}
+           	 if(name == "Canada" || name == "Mexico"){
+           		return '#7570b3'
+           	}
+            if(d == "yes"){
+				return '#1b9e77'
+			} if (d == "no"){
+				return '#d95f02'
+			}  if (d == "N/A"){
+				return '#d7191c'
+			}
+		}
+
+
 
     return div;
 };
