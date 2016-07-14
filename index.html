@@ -388,26 +388,28 @@ console.log(geojsonFeature.features.length)
 			}
 		}
 		
-		function getColor(d, name) {
+		function getColor(d, name, voice) {
            	if(name == "United States of America" || name == "Puerto Rico"){
            		return '#AEC6CF'
            	}
-           	 if(name == "Canada" || name == "Mexico"){
+           	else if(name == "Canada" || name == "Mexico"){
            		return '#7570b3'
            	}
-            if(d == "yes"){
+            else if(d == "yes"){
 				return '#1b9e77'
-			} if (d == "no"){
+			}else if (d == "no" || voice === "2.99"){
 				return '#d95f02'
-			}  if (d == "N/A"){
+			}else  if (d == "N/A" && voice !== "2.99"){
 				return '#d7191c'
 			}
 		}
 
+		console.log("hi")
+
 
 		function style(feature) {
     	return {
-        fillColor: getColor(feature.properties.preferred, feature.properties.name),
+        fillColor: getColor(feature.properties.preferred, feature.properties.name, feature.properties.voiceRate),
         weight: 2,
         opacity: 1,
         color: 'transparent',
@@ -476,8 +478,10 @@ function getText(props){
 				'$25 for 1GB Data, 500 minutes, 500 texts' + '<br/ >';
 		text+= '</br>' + 'Voice: $0.99/min';
 	}
-	text+= '</br>' + ' Sent SMS : $0.50, MMS = $0.25'
-	+ '</br>' + ' Received SMS: $0.05, MMS = $0.25';
+	if(props.asGo != "N/A"){
+		text+= '</br>' + ' Sent SMS : $0.50, MMS = $0.25'
+		+ '</br>' + ' Received SMS: $0.05, MMS = $0.25';
+	}
 	if(props.name === "United States of America" || props.name === "Puerto Rico"){
 		text = "Domestic rates apply";
 	}
