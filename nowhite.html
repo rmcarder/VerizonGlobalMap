@@ -335,7 +335,8 @@ console.log(geojsonFeature.features.length)
     	minZoom: 3,
     	id: 'iamleah.0dg3ij53',
     	style: 'mapbox://styles/iamleah/ciqmr2mp90003bbm98zg2t0mr',
-    	accessToken: 'pk.eyJ1IjoiaWFtbGVhaCIsImEiOiJjaXBnd3VyZTUwMHZldGVtNDIxcndweGQ4In0.X4LKl9HPH3PY9yAiTDJfJg'
+    	accessToken: 'pk.eyJ1IjoiaWFtbGVhaCIsImEiOiJjaXBnd3VyZTUwMHZldGVtNDIxcndweGQ4In0.X4LKl9HPH3PY9yAiTDJfJg',
+    	noWrap: true
 		}).addTo(mymap);
 
 		var popup = L.popup();
@@ -412,10 +413,10 @@ console.log(geojsonFeature.features.length)
 		function style(feature) {
     	return {
         fillColor: getColor(feature.properties.preferred, feature.properties.name, feature.properties.voiceRate),
-        weight: 2,
+        weight: .05,
         opacity: 1,
-        color: 'transparent',
-        dashArray: '3',
+        color: 'grey',
+        dashArray: '.1',
         fillOpacity: 0.2
     	};
 		}
